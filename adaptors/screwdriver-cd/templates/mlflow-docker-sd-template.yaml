@@ -27,7 +27,7 @@ config:
     - install-terraform: sd-cmd exec QubitPi/install-hashicorp-terraform-ubuntu@latest
 
     - setup-hashicorp-deployment-tool: |
-        git clone --depth 1 https://github.com/QubitPi/hashistack.git ../hashistack
+        git clone --depth 1 https://github.com/paion-data/hashistack.git ../hashistack
 
         cp ../hashistack/hashicorp/machine-learning/images/aws-ml.packer.pkr.hcl ../hashistack/hashicorp/machine-learning/images/mlflow-docker
         cp ../hashistack/hashicorp/machine-learning/images/aws-ml.source.pkr.hcl ../hashistack/hashicorp/machine-learning/images/mlflow-docker

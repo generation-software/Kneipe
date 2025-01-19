@@ -37,7 +37,7 @@ jobs:
         shell: bash
       - name: Code style check
         shell: bash
-        run: yarn prettier . --check
+        run: yarn prettier --ignore-path .gitignore . --check
       - name: ESLint
         run: yarn eslint .
         shell: bash

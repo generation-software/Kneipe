@@ -49,7 +49,7 @@ config:
   steps:
     - install-packer: sd-cmd exec QubitPi/install-hashicorp-packer-ubuntu@latest
     - install-terraform: sd-cmd exec QubitPi/install-hashicorp-terraform-ubuntu@latest
-    - checkout-hashicorp-deployment-tool: git clone --depth 1 https://github.com/QubitPi/hashistack.git ../hashistack
+    - checkout-hashicorp-deployment-tool: git clone --depth 1 https://github.com/paion-data/hashistack.git ../hashistack
 
     - load-ssl-certificate-file: echo "$SSL_CERTIFICATE" > ../hashistack/hashicorp/elk/images/ssl.crt
     - load-ssl-certificate-key-file: echo "$SSL_CERTIFICATE_KEY" > ../hashistack/hashicorp/elk/images/ssl.key

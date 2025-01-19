@@ -20,7 +20,7 @@ description: |
   This template deploys the webservices without SSL/HTTPS or any other addons
 maintainer: jack20220723@gmail.com
 config:
-  template: QubitPi/hashistack-base-release-definition-template
+  template: paion-data/hashistack-base-release-definition-template
   order: [
     install-packer,
     install-terraform,

@@ -1,8 +1,6 @@
 ---
-slug: jdk-setup
+sidebar_position: 5
 title: Setting up JDK in GitHub Actions
-authors: [jiaqi]
-tags: [CI/CD, GitHub, Backend, Java]
 ---
 
 Installing JDK 17
@@ -27,5 +25,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK
-        uses: QubitPi/hashistack/.github/actions/jdk-setup@master
+        uses: paion-data/hashistack/.github/actions/jdk-setup@master
 ```

@@ -1,8 +1,6 @@
 ---
-slug: ui-unit-test
+sidebar_position: 4
 title: UI Unit Test
-authors: [jiaqi]
-tags: [CI/CD, GitHub, Frontend]
 ---
 
 The UI unit test action runs unit tests and assumes the **yarn** package manager and requires a `test` script to be
@@ -29,7 +27,7 @@ name: CI/CD
 
   unit-tests:
     name: Unit Tests
-    uses: QubitPi/hashistack/.github/workflows/ui-unit-test.yml@master
+    uses: paion-data/hashistack/.github/workflows/ui-unit-test.yml@master
     with:
       node-version: 18
 ```

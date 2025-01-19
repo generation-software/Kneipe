@@ -51,7 +51,7 @@ config:
     - install-packer: sd-cmd exec QubitPi/install-hashicorp-packer-ubuntu@latest
     - install-terraform: sd-cmd exec QubitPi/install-hashicorp-terraform-ubuntu@latest
     - setup-hashicorp-deployment-tool: |
-        git clone --depth 1 https://github.com/QubitPi/hashistack.git    ../hashistack
+        git clone --depth 1 https://github.com/paion-data/hashistack.git    ../hashistack
         cp ../hashistack/hashicorp/common/images/aws/*                   ../hashistack/hashicorp/$INFRASTRUCTURE/images/aws
         cp ../hashistack/hashicorp/common/instances/aws/aws-ec2.tf       ../hashistack/hashicorp/$INFRASTRUCTURE/instances/aws
         cp ../hashistack/hashicorp/common/instances/aws/aws-terraform.tf ../hashistack/hashicorp/$INFRASTRUCTURE/instances/aws

@@ -55,6 +55,4 @@ be an effective way to manage and share a software configurations within a team.
 
 :::
 
-[hashistack]'s github-secret now comes into play to bridge the gap between two componet.
-
-[hashistack]: https://hashistack.org/
+hashistack's github-secret now comes into play to bridge the gap between two componet.

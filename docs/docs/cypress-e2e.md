@@ -1,8 +1,6 @@
 ---
-slug: cypress-e2e
+sidebar_position: 5
 title: Cypress E2E Tests
-authors: [jiaqi]
-tags: [CI/CD, GitHub, Frontend]
 ---
 
 :::info
@@ -63,7 +61,7 @@ The example below is a very simple setup:
      e2e-tests:
        name: Unit Tests
        needs: unit-tests
-       uses: QubitPi/hashistack/.github/workflows/cypress-e2e.yml@master
+       uses: paion-data/hashistack/.github/workflows/cypress-e2e.yml@master
    ```
 
    In the example above, the node 18 is used in the CI/CDed project by default. A list of custom node versions can be
@@ -75,7 +73,7 @@ The example below is a very simple setup:
      e2e-tests:
        name: Unit Tests
        needs: unit-tests
-       uses: QubitPi/hashistack/.github/workflows/cypress-e2e.yml@master
+       uses: paion-data/hashistack/.github/workflows/cypress-e2e.yml@master
        with:
          node-versions: '["16", "18", "20"]'
    ```

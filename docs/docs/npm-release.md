@@ -1,8 +1,6 @@
 ---
-slug: npm-release
+sidebar_position: 6
 title: NPM Release action
-authors: [jiaqi]
-tags: [CI/CD, GitHub, Frontend, NPM]
 ---
 
 :::tip
@@ -36,7 +34,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: QubitPi/hashistack/.github/actions/npm-release.yml@master
+      - uses: paion-data/hashistack/.github/actions/npm-release.yml@master
         with:
           node-version: ${{ env.NODE_VERSION }}
           npm-token: ${{ env.NPM_TOKEN }}
