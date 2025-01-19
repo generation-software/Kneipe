@@ -9,6 +9,7 @@ Overview
 ### General
 
 - [YAML and Markdown style check](yml-md-style-and-link-checks)
+- [Cancel previous CI/CD run](cancel-prev-run)
 
 ### Frontend
 
