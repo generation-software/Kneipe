@@ -1,8 +1,6 @@
 ---
-slug: ui-code-style
+sidebar_position: 3
 title: UI Code Style
-authors: [jiaqi]
-tags: [CI/CD, GitHub, Frontend]
 ---
 
 In Frontend dev realm, there are lots of code style checker. Assembling all of them together takes efforts and pains.
@@ -31,7 +29,7 @@ name: CI/CD
 
   code-style:
     name: React & TS Code Style Check
-    uses: QubitPi/hashistack/.github/workflows/ui-code-style.yml@master
+    uses: paion-data/hashistack/.github/workflows/ui-code-style.yml@master
     with:
       node-version: 18
 ```

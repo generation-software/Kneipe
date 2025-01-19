@@ -1,8 +1,0 @@
-{
-  "label": "Docker Mailserver",
-  "position": 8,
-  "link": {
-    "type": "generated-index",
-    "description": "Deploying team mail server to AWS via hashistack"
-  }
-}

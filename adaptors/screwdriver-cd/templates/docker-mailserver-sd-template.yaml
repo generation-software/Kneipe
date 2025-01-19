@@ -77,7 +77,7 @@ config:
   steps:
     - install-packer: sd-cmd exec QubitPi/install-hashicorp-packer-ubuntu@latest
     - install-terraform: sd-cmd exec QubitPi/install-hashicorp-terraform-ubuntu@latest
-    - checkout-hashicorp-deployment-tool: git clone --depth 1 https://github.com/QubitPi/hashistack.git ../hashistack
+    - checkout-hashicorp-deployment-tool: git clone --depth 1 https://github.com/paion-data/hashistack.git ../hashistack
 
     - load-packer-variable-file: |
         echo ami_region          = \"$(meta get parameters.ami-region.value)\"           >> ../hashistack/hashicorp/docker-mailserver/images/aws.auto.pkrvars.hcl

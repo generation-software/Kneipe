@@ -75,12 +75,12 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Set up JDK
-      uses: QubitPi/hashistack/.github/actions/jdk-setup@master
+      uses: paion-data/hashistack/.github/actions/jdk-setup@master
 
     - name: Checkout HashiCorp deployment tool and setup directory structure
       shell: bash
       run: |
-        git clone --depth 1 https://github.com/QubitPi/hashistack.git ../hashistack
+        git clone --depth 1 https://github.com/paion-data/hashistack.git ../hashistack
         if [ ${{ inputs.ssl }} ]; then
           cd ../hashistack/hashicorp/webservice/images
           mv ssl/* .
@@ -98,7 +98,7 @@ runs:
       shell: bash
     - name: Configure SSL
       if: ${{ inputs.ssl }}
-      uses: QubitPi/hashistack/.github/actions/ssl-setup@master
+      uses: paion-data/hashistack/.github/actions/ssl-setup@master
       with:
         aws-ws-pkrvars-hcl: ${{ secrets.AWS_WS_PKRVARS_HCL }}
         ssl-certificate: ${{ secrets.SSL_CERTIFICATE }}
@@ -113,7 +113,7 @@ runs:
 
     - name: Install data-models
       if: ${{ input.template == 'jps' }}
-      uses: QubitPi/hashistack/jpa-elide/install-data-models@master
+      uses: paion-data/hashistack/jpa-elide/install-data-models@master
       with:
         model-package-jar-group-id: com.qubitpi
         model-package-jar-artifact-id: jersey-webservice-template-jpa-data-models
@@ -128,7 +128,7 @@ runs:
       shell: bash
 
     - name: Run deployment
-      uses: QubitPi/hashistack@master
+      uses: paion-data/hashistack@master
       with:
         hashicorp-dir: ../hashistack/hashicorp/webservice
         aws-access-key-id: ${{ inputs.aws-access-key-id }}

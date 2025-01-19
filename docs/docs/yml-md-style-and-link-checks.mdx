@@ -1,8 +1,6 @@
 ---
-slug: yml-and-md-style-checks
+sidebar_position: 2
 title: Performing Style Check on YAML & Markdown Files and Link Check
-authors: [jiaqi]
-tags: [CI/CD, GitHub, Code Style]
 ---
 
 Inspired by [Sous Chefs](https://github.com/sous-chefs/.github/blob/main/.github/workflows/lint-unit.yml), hashistack
@@ -26,7 +24,7 @@ name: CI/CD
 
 jobs:
   yml-md-style-and-link-checks:
-    uses: QubitPi/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
+    uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
 ```
 
 :::tip
@@ -76,7 +74,7 @@ name: CI/CD
 
 jobs:
   yml-md-style-and-link-checks:
-    uses: QubitPi/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
+    uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
     with:
       use-custom-yamllint-config-file: true
 ```
@@ -149,7 +147,7 @@ name: CI/CD
 
 jobs:
   yml-md-style-and-link-checks:
-    uses: QubitPi/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
+    uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
     with:
       use-custom-mdlrc-config-file: true
       use-custom-markdownlint-config-file: true
@@ -188,7 +186,7 @@ name: CI/CD
 
 jobs:
   yml-md-style-and-link-checks:
-    uses: QubitPi/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
+    uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yml@master
     with:
       use-custom-lycheeignore-file: true
 ```

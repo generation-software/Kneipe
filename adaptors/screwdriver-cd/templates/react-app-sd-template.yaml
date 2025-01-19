@@ -18,7 +18,7 @@ version: '1.0.0'
 description: Screwdriver CD template for deploying React APP to AWS through HashiCorp.
 maintainer: jack20220723@gmail.com
 config:
-  template: QubitPi/hashistack-ssl-release-definition-template
+  template: paion-data/hashistack-ssl-release-definition-template
   order: [
     install-packer,
     install-terraform,

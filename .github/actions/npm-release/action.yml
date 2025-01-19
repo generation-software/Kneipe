@@ -43,7 +43,7 @@ runs:
         registry-url: "https://registry.npmjs.org"
     - name: Tag for release
       run: |
-        git clone --depth 1 https://github.com/QubitPi/hashistack.git ../hashistack
+        git clone --depth 1 https://github.com/paion-data/hashistack.git ../hashistack
         cp ../hashistack/.github/version-bump/tag-for-release.bash    .github/tag-for-release.bash
         cp ../hashistack/.github/version-bump/upversion.py            .github/upversion.py
         git config --global user.name '${{ inputs.user }}'

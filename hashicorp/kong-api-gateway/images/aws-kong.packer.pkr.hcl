@@ -21,7 +21,7 @@ packer {
 
     hashistack = {
       version = ">= 0.0.18"
-      source  = "github.com/QubitPi/hashistack"
+      source  = "github.com/paion-data/hashistack"
     }
   }
 }

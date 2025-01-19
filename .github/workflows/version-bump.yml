@@ -36,7 +36,7 @@ jobs:
           fetch-depth: 0
       - name: Download auto-version bump scripts
         run: |
-          git clone https://github.com/QubitPi/hashistack.git ../hashistack
+          git clone https://github.com/paion-data/hashistack.git ../hashistack
           cp ../hashistack/.github/version-bump/tag-for-release.bash .github/
           cp ../hashistack/.github/version-bump/upversion.py .github/
       - name: Tag for release

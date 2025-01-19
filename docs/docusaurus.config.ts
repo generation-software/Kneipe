@@ -19,12 +19,12 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'hashistack',
-  tagline: 'Infrastructure as Code via HashiCorp',
+  tagline: 'Unifying CI/CD practices within Paion Data',
   favicon: 'img/favicon.ico',
 
-  url: 'https://hashistack.org',
+  url: 'https://hashistack.paion-data.dev',
   baseUrl: '/',
-  organizationName: 'QubitPi',
+  organizationName: 'paion-data',
   projectName: 'hashistack',
 
   onBrokenLinks: 'warn',
@@ -41,12 +41,12 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/QubitPi/hashistack/tree/master/docs',
+          editUrl: 'https://github.com/paion-data/hashistack/tree/master/docs',
         },
         blog: {
           showReadingTime: true,
           blogSidebarCount: 'ALL',
-          editUrl: 'https://github.com/QubitPi/hashistack/tree/master/docs',
+          editUrl: 'https://github.com/paion-data/hashistack/tree/master/docs',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -73,7 +73,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/QubitPi/hashistack',
+          href: 'https://github.com/paion-data/hashistack',
           label: 'GitHub',
           position: 'right',
         },
@@ -109,7 +109,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/QubitPi/hashistack',
+              href: 'https://github.com/paion-data/hashistack',
             },
           ],
         },
