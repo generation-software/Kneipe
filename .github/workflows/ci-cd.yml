@@ -22,14 +22,8 @@ name: CI/CD
 
 jobs:
   cancel-previous:
-    name: Cancel Previous Runs In Order to Allocate Action Resources Immediately for Current Run
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cancel previous
-        uses: styfle/cancel-workflow-action@0.10.1
-        if: ${{github.ref != 'refs/head/master'}}
-        with:
-          access_token: ${{ github.token }}
+    uses: ./.github/workflows/cancel-previous-run.yaml
+    secrets: inherit
 
   yml-md-style-and-link-checks:
     uses: ./.github/workflows/yml-md-style-and-link-checks.yml
