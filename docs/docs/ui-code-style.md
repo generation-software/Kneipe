@@ -28,7 +28,7 @@ name: CI/CD
       - master
 
   code-style:
-    name: React & TS Code Style Check
+    name: Code Style Check
     uses: paion-data/hashistack/.github/workflows/ui-code-style.yml@master
     with:
       node-version: 18

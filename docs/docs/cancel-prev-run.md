@@ -16,7 +16,7 @@ name: CI/CD
 
 jobs:
   cancel-previous:
-    uses: ./.github/workflows/cancel-previous-run.yaml
+    uses: paion-data/hashistack/.github/workflows/cancel-previous-run.yaml@master
     secrets: inherit
 ```
 
