@@ -6,6 +6,8 @@ title: Introduction
 Overview
 --------
 
+Teamwork is about efficiency and uniformity. The standardized CI/CD practice not only
+
 ### General
 
 - [YAML and Markdown style check](yml-md-style-and-link-checks)
