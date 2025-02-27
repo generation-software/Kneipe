@@ -1,0 +1,66 @@
+# Copyright 2025 Paion Data
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+name: "Deploy React App to GitHub Pages"
+
+"on":
+  workflow_call:
+    inputs:
+      node-version:
+        description: 'Node.js version used to run the deployed React App. Default to 22'
+        required: false
+        default: 22
+        type: number
+      user-name:
+        description: 'git config user.name'
+        required: true
+        type: string
+      user-email:
+        description: 'git config user.email'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set node version to ${{ inputs.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - name: Set up yarn
+        run: |
+          corepack enable
+          yarn set version latest
+      - name: Install dependencies
+        run: yarn
+      - name: Test production build
+        run: yarn build
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      - name: Load CNAME
+        run: cp CNAME dist
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
+          enable_jekyll: false
+          user_name: ${{ inputs.user-name }}
+          user_email: ${{ inputs.user-email }}

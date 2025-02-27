@@ -15,7 +15,7 @@ Teamwork is about efficiency and uniformity. The standardized CI/CD practice not
 
 ### Frontend
 
-- [UI code style check](ui-code-style)
+- [UI code style check](react-code-style)
 - [UI unit tests](ui-unit-test)
 - [Lighthouse tests](lighthouse)
 - [Cypress E2E tests](cypress-e2e)
