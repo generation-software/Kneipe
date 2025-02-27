@@ -51,8 +51,10 @@ jobs:
         run: |
           corepack enable
           yarn set version latest
-      - if: ${{ !inputs.env-path }}
-        run: cp ${{ !inputs.env-path }} .env && yarn
+      - if: ${{ inputs.env-path != '' }}
+        run: cp ${{ !inputs.env-path }} .env
+      - name: Install dependencies
+        run: yarn
       - name: Audit URLs using Lighthouse
         id: lighthouse_audit
         uses: treosh/lighthouse-ci-action@v12

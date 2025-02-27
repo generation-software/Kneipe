@@ -59,24 +59,10 @@ The example below is a very simple setup:
          - master
 
      e2e-tests:
-       name: Unit Tests
-       needs: unit-tests
-       uses: paion-data/hashistack/.github/workflows/cypress-e2e.yml@master
+       uses: paion-data/hashistack/.github/workflows/cypress-e2e.yaml@master
    ```
 
-   In the example above, the node 18 is used in the CI/CDed project by default. A list of custom node versions can be
-   used to replace the default. For example, to run E2E tests in node 16, 18, and 20, simply use **node-versions**
-   parameter:
-
-   ```yaml
-   ---
-     e2e-tests:
-       name: Unit Tests
-       needs: unit-tests
-       uses: paion-data/hashistack/.github/workflows/cypress-e2e.yml@master
-       with:
-         node-versions: '["16", "18", "20"]'
-   ```
+   In the example above, the node 22 is used in the CI/CDed project by default.
 
 :::tip
 
