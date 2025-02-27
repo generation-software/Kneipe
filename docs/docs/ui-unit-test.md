@@ -29,12 +29,12 @@ name: CI/CD
     name: Unit Tests
     uses: paion-data/hashistack/.github/workflows/ui-unit-test.yml@master
     with:
-      node-version: 18
+      node-version: 22
 ```
 
 :::tip
 
-In the example above, the node 18 is used in the CI/CDed project.
+In the example above, the node 22 and the most recent stable yarn version is used in the CI/CD project.
 
 :::
 

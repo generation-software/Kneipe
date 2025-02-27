@@ -31,12 +31,12 @@ name: CI/CD
     name: Code Style Check
     uses: paion-data/hashistack/.github/workflows/ui-code-style.yml@master
     with:
-      node-version: 18
+      node-version: 22
 ```
 
 :::tip
 
-In the example above, the node 18 is used in the CI/CDed project.
+In the example above, the node 22 and the most recent stable yarn version is used in the CI/CD project.
 
 :::
 

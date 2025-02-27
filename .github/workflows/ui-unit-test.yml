@@ -29,9 +29,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set node version to ${{ inputs.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
+      - name: Set up yarn
+        run: |
+          corepack enable
+          yarn set version latest
       - name: Install dependencies
         run: yarn install
         shell: bash
