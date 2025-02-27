@@ -20,6 +20,11 @@ name: CI/CD
     branches:
       - master
 
+env:
+  USER: QubitPi
+  EMAIL: jack20220723@gmail.com
+  NODE_VERSION: 22
+
 jobs:
   cancel-previous:
     uses: ./.github/workflows/cancel-previous-run.yaml
@@ -50,14 +55,15 @@ jobs:
         working-directory: ./docs/
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - name: Install dependencies
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Set up yarn
         run: |
-          : # https://yarnpkg.com/corepack
-          npm install -g corepack
-          yarn
+          corepack enable
+          yarn set version latest
+      - name: Install dependencies
+        run: yarn
       - name: Build website
         run: yarn build
       - name: Load CNAME file
@@ -69,5 +75,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/build
-          user_name: QubitPi
-          user_email: jack20220723@gmail.com
+          user_name: ${{ env.USER }}
+          user_email: ${{ env.EMAIL }}
