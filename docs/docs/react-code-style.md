@@ -29,7 +29,7 @@ name: CI/CD
 
   code-style:
     name: Code Style Check
-    uses: paion-data/hashistack/.github/workflows/react-code-style.yaml@master
+    uses: paion-data/hashistack/.github/workflows/react/code-style.yaml@master
     with:
       node-version: 22
 ```
