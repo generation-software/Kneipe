@@ -1,0 +1,86 @@
+# Copyright 2025 Paion Data
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+name: "Lighthouse"
+
+"on":
+  workflow_call:
+    inputs:
+      node-version:
+        description: 'Node.js version used to run the lighthoused React App. Default to 22'
+        required: false
+        default: 22
+        type: number
+      env-path:
+        description: 'The path to the .env file of the lighthoused React App if provided. For example, .env.test'
+        required: false
+        type: string
+      budget-path:
+        description: 'The path, relative to project root, of the "budget.json" file which describe the performance budget. Default to "./.github/lighthouse/lighthouse-budget.json". Please see https://github.com/treosh/lighthouse-ci-action?tab=readme-ov-file#budgetpath for more details'
+        required: false
+        default: ./.github/lighthouse/lighthouse-budget.json
+        type: string
+      config-path:
+        description: 'The path, relative to project root, of the "lighthouserc.json" file for full control of the Lighthouse environment and assertions. Default to "./.github/lighthouse/lighthouserc.json". Please see https://github.com/treosh/lighthouse-ci-action?tab=readme-ov-file#configpath for more details'
+        required: false
+        default: ./.github/lighthouse/lighthouserc.json
+        type: string
+
+jobs:
+  lighthouse:
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - name: Set up yarn
+        run: |
+          corepack enable
+          yarn set version latest
+      - if: ${{ !inputs.env-path }}
+        run: cp ${{ !inputs.env-path }} .env && yarn
+      - name: Audit URLs using Lighthouse
+        id: lighthouse_audit
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://localhost:3000
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          budgetPath: ${{ inputs.budget-path }}
+          configPath: ${{ inputs.config-path }}
+
+      - name: Format lighthouse score
+        id: format_lighthouse_score
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #  7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const results = ${{ steps.lighthouse_audit.outputs.manifest }}
+            const links = ${{ steps.lighthouse_audit.outputs.links }}
+            const createLighthouseReport = (await import(`${process.env.GITHUB_WORKSPACE}/.github/lighthouse/formatLighthouseReport.js`)).default;
+            const comment = createLighthouseReport({ results, links });
+            core.setOutput("comment", comment);
+
+      - name: Add Lighthouse stats as comment
+        id: comment_to_pr
+        uses: marocchino/sticky-pull-request-comment@efaaab3fd41a9c3de579aba759d2552635e590fd #  2.8.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.pull_request.number }}
+          header: lighthouse
+          message: ${{ steps.format_lighthouse_score.outputs.comment }}

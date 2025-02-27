@@ -31,7 +31,7 @@ jobs:
     secrets: inherit
 
   yml-md-style-and-link-checks:
-    uses: ./.github/workflows/yml-md-style-and-link-checks.yml
+    uses: ./.github/workflows/yml-md-style-and-link-checks.yaml
 
   test-upversion:
     name: Test upversion.py
