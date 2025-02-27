@@ -18,8 +18,9 @@ name: "UI Code Style Checks"
   workflow_call:
     inputs:
       node-version:
-        description: 'NodeJS version, such as "16"'
-        required: true
+        description: 'Node version. Default to 22'
+        required: false
+        default: 22
         type: number
 
 jobs:

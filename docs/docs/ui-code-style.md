@@ -36,7 +36,7 @@ name: CI/CD
 
 :::tip
 
-In the example above, the node 22 and the most recent stable yarn version is used in the CI/CD project.
+In the example above, the node 22 and the most recent stable yarn version is assumed in the CI/CD project.
 
 :::
 

@@ -18,9 +18,10 @@ name: "UI unit tests"
   workflow_call:
     inputs:
       node-version:
-        description: 'NodeJS version, such as "16"'
-        type: string
-        required: true
+        description: 'Node version. Default to 22'
+        required: false
+        default: 22
+        type: number
 
 jobs:
   ui-unit-test:
