@@ -27,7 +27,7 @@ name: CI/CD
 
   unit-tests:
     name: Unit Tests
-    uses: paion-data/hashistack/.github/workflows/react-unit-tests.yaml@master
+    uses: paion-data/hashistack/.github/workflows/react/unit-tests.yaml@master
     with:
       node-version: 22
 ```
