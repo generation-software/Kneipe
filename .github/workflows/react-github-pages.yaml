@@ -34,6 +34,7 @@ name: "Deploy React App to GitHub Pages"
 jobs:
   deploy:
     name: Deploy to GitHub Pages
+    if: ${{ github.event.repository.public }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
