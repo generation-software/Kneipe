@@ -31,6 +31,10 @@ name: React CI/CD
         description: 'git config user.email'
         required: true
         type: string
+      cname:
+        description: 'The CNAME of the React app deployed to GitHub Pages'
+        required: true
+        type: string
 
 jobs:
   cancel-previous:
@@ -66,3 +70,4 @@ jobs:
     with:
       user-name: ${{ inputs.user-name }}
       user-email: ${{ inputs.user-email }}
+      cname: ${{ inputs.cname }}
