@@ -33,7 +33,7 @@ name: React CI/CD
         type: string
       cname:
         description: 'The CNAME of the React app deployed to GitHub Pages'
-        required: true
+        required: false
         type: string
 
 jobs:

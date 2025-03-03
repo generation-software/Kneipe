@@ -32,13 +32,13 @@ name: "Deploy React App to GitHub Pages"
         type: string
       cname:
         description: 'The CNAME of the React app deployed to GitHub Pages'
-        required: true
+        required: false
         type: string
 
 jobs:
   deploy:
     name: Deploy to GitHub Pages
-    if: ${{ github.event.repository.public }}
+    if: ${{ !github.event.repository.private }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
