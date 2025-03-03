@@ -30,6 +30,10 @@ name: "Deploy React App to GitHub Pages"
         description: 'git config user.email'
         required: true
         type: string
+      cname:
+        description: 'The CNAME of the React app deployed to GitHub Pages'
+        required: true
+        type: string
 
 jobs:
   deploy:
@@ -54,8 +58,6 @@ jobs:
         run: yarn build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      - name: Load CNAME
-        run: cp CNAME dist
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
@@ -65,3 +67,4 @@ jobs:
           enable_jekyll: false
           user_name: ${{ inputs.user-name }}
           user_email: ${{ inputs.user-email }}
+          cname: ${{ inputs.cname }}
