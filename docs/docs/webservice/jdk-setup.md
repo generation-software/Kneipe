@@ -1,5 +1,4 @@
 ---
-sidebar_position: 8
 title: Setting up JDK in GitHub Actions
 ---
 

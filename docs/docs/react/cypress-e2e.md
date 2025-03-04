@@ -1,5 +1,4 @@
 ---
-sidebar_position: 7
 title: Cypress E2E Tests
 ---
 
