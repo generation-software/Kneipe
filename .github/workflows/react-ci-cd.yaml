@@ -19,17 +19,16 @@ name: React CI/CD
     inputs:
       use-custom-lycheeignore-file:
         description: |
-          Whether or not to use custome .markdownlint.rb file located at the root of downstream project.
-          Default to "false"
+          Whether or not to use custome .lycheeignore file located at the root of downstream project. Default to "false"
         type: boolean
         required: false
       user-name:
         description: 'git config user.name'
-        required: true
+        required: false
         type: string
       user-email:
         description: 'git config user.email'
-        required: true
+        required: false
         type: string
       cname:
         description: 'The CNAME of the React app deployed to GitHub Pages'
