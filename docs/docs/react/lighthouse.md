@@ -1,9 +1,8 @@
 ---
-sidebar_position: 5
 title: Lighthouse
 ---
 
-![Lighthouse example "Error loading lighthouse-example.png"](./img/lighthouse-example.png)
+![Lighthouse example "Error loading lighthouse-example.png"](img/lighthouse-example.png)
 
 To use this action, make sure a `.env.test` file is in the project root. In case not needed, simply make the `.env.test`
 an empty file. Import it in the following way:
