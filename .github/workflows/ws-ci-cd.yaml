@@ -41,6 +41,10 @@ name: Java Webservice CI/CD
         required: false
         type: string
 
+env:
+  JDK_VERSION: 17
+  JDK_DISTRIBUTION: 'adopt'
+
 jobs:
   cancel-previous:
     uses: paion-data/hashistack/.github/workflows/cancel-previous-run.yaml@master
@@ -50,10 +54,6 @@ jobs:
     uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yaml@master
     with:
       use-custom-lycheeignore-file: ${{ inputs.use-custom-lycheeignore-file }}
-
-  code-style:
-    name: Code Style Check
-    uses: paion-data/hashistack/.github/workflows/react-code-style.yaml@master
 
   tests:
     name: Unit & Integration Tests
