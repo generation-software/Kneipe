@@ -13,6 +13,8 @@ __HashiStack__ is an opinionated GitHub CI/CD library of
 shared among Paion Data projects. It is an effort that __unifies and standardize the CI/CD of software developed within
 Paion Data__.
 
+![HashiCorp deoloyment "Error loading ci-cd.png"](docs/static/img/ci-cd.png)
+
 License
 -------
 
