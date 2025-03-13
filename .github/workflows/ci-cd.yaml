@@ -1,4 +1,4 @@
-# Copyright 2025 Paion Data
+# Copyright 2025 Paion Data. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ jobs:
 
   test-upversion:
     name: Test upversion.py
-    needs: [yml-md-style-and-link-checks]
+    needs: yml-md-style-and-link-checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,6 +45,53 @@ jobs:
           if [[ "$NEW_TAG" != "1.2.4" ]]; then
               exit 1
           fi
+
+  docker-image:
+    name: Build Test & Release Paion Data Docker Images
+    needs: yml-md-style-and-link-checks
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image-context: [
+          {
+            image-name: ubuntu-base,
+            dockerfile-path: linuxserver/ubuntu
+          }
+        ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Test ${{ matrix.image-context.image-name }} image build
+        uses: docker/build-push-action@v3
+        with:
+          context: ${{ matrix.image-context.dockerfile-path }}
+          push: false
+      - name: Login to DockerHub
+        if: github.ref == 'refs/heads/master'
+        uses: docker/login-action@v2
+        with:
+          username: paiondatahub
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Push image to DockerHub
+        if: github.ref == 'refs/heads/master'
+        uses: docker/build-push-action@v3
+        with:
+          context: ${{ matrix.image-context.dockerfile-path }}
+          push: true
+          tags: paiondatahub/${{ matrix.image-context.image-name }}:latest
+      - name: Push image Description
+        if: github.ref == 'refs/heads/master'
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: paiondatahub
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: paiondatahub/${{ matrix.image-context.image-name }}
+          readme-filepath: ${{ matrix.image-context.dockerfile-path }}/README.md
 
   documentation:
     name: Test Documentation Build & Deploy Documentation to GitHub Pages
