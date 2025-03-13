@@ -11,14 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM ubuntu:latest
+FROM paiondatahub/ubuntu-base:latest
 
 LABEL maintainer="Jiaqi (Jack) Liu"
 LABEL maintainer-email="jack20220723@gmail.com"
 
 ENV NODE_VERSION 22
 
-RUN apt update
-RUN apt upgrade -y
-RUN apt install software-properties-common -y
-RUN apt install wget
+RUN wget https://deb.nodesource.com/setup_${NODE_VERSION}.x && chmod u+x setup_${NODE_VERSION}.x && ./setup_${NODE_VERSION}.x
+RUN apt-get install -y nodejs
+RUN rm setup_${NODE_VERSION}.x
+
+RUN npm install -g yarn
+RUN corepack enable
+RUN yarn set version latest
