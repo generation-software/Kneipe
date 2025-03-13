@@ -57,6 +57,10 @@ jobs:
           {
             image-name: ubuntu-base,
             dockerfile-path: linuxserver/ubuntu
+          },
+          {
+            image-name: react,
+            dockerfile-path: linuxserver/react
           }
         ]
     steps:
