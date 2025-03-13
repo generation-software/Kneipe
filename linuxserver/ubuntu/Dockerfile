@@ -12,9 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#!/usr/bin/python
-import os
+FROM ubuntu:latest
 
-split_tag = (os.environ['LAST_TAG'].split('-')[0]).split(".")
-split_tag[-1] = str(int(split_tag[-1]) + 1)
-print(".".join(split_tag))
+LABEL maintainer="Jiaqi (Jack) Liu"
+LABEL maintainer-email="jack20220723@gmail.com"
+
+ENV NODE_VERSION 22
+
+RUN apt update
+RUN apt upgrade -y
+RUN apt install software-properties-common -y
+RUN apt install wget
