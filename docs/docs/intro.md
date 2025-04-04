@@ -86,6 +86,7 @@ Those workflows are designed for React-based projects only:
 
 - Databases
 
+  - [ArangoDB](https://arango.paion-data.dev/)
   - [MySQL Tutorial](https://www.mysqltutorial.org/)
   - [Oracle Tutorial](https://www.oracletutorial.com/)
   - [Postgres.app](https://postgresapp.com/) - The easiest way to get started with PostgreSQL on Mac
