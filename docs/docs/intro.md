@@ -42,6 +42,7 @@ Those workflows are designed for React-based projects only:
 - [OpenID Connect explained](https://connect2id.com/learn/openid-connect)
 - [Refactoring.Guru](https://refactoring.guru/)
 - [Online JSON formatter](https://jsonformatter.curiousconcept.com/#)
+- [Paion Data Dev team news room](https://github.com/paion-data-bot)
 
 #### Frontend
 
