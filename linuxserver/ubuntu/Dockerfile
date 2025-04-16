@@ -11,14 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 LABEL maintainer="Jiaqi (Jack) Liu"
 LABEL maintainer-email="jack20220723@gmail.com"
 
-ENV NODE_VERSION 22
-
 RUN apt update
 RUN apt upgrade -y
 RUN apt install software-properties-common -y
-RUN apt install wget
+RUN apt install wget -y
+RUN apt install curl -y
