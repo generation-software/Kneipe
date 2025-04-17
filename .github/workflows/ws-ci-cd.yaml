@@ -112,6 +112,7 @@ jobs:
   docker-image:
     name: Build Test & Release Development Docker Image
     needs: tests
+    if: ${{ inputs.dockerhub-username != '' && inputs.docker-image-name != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
