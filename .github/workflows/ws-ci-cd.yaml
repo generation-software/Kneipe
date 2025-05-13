@@ -137,6 +137,19 @@ jobs:
       - name: Install dependencies
         working-directory: docs
         run: yarn
+      - name: Load organizational fonts and font configs
+        run: |
+          cd ${{ github.workspace }}/docs/src/css
+          rm font.css
+          curl -O -L https://raw.githubusercontent.com/paion-data/hashistack/refs/heads/master/.github/docusaurus/font.css
+          cd ${{ github.workspace }}/docs/static/fonts
+          rm -rf *
+          mkdir Poppins
+          curl -O -L https://github.com/paion-data/hashistack/raw/refs/heads/master/.github/fonts/Poppins/Poppins-Regular.ttf
+          curl -O -L https://github.com/paion-data/hashistack/raw/refs/heads/master/.github/fonts/Poppins/Poppins-Bold.ttf
+          cd ../
+          mkdir Ubuntu
+          curl -O -L https://github.com/paion-data/hashistack/raw/refs/heads/master/.github/fonts/Ubuntu/UbuntuMono-Regular.ttf
       - name: Build documentation
         working-directory: docs
         run: yarn build
