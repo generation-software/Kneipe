@@ -28,7 +28,7 @@ jobs:
     name: UI Unit Test Job
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set node version to ${{ inputs.node-version }}
         uses: actions/setup-node@v4
         with:

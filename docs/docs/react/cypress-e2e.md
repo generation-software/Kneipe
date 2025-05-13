@@ -20,7 +20,7 @@ The example below is a very simple setup:
 
 1. Install Cypress with `yarn add cypress --dev`
 2. Initialize Cypress with `yarn run cypress open`
-3. [Support TypeScript](https://qubitpi.github.io/cypress-documentation/guides/tooling/typescript-support/)
+3. [Support TypeScript](https://qubitpi.github.io/cypress-documentation/app/tooling/typescript-support/)
 4. Put all **.spec.cy.ts** test files under "cypress/e2e" directory
 5. Install [wait-on]: `yarn add -D wait-on`
 6. Add the following script command to `package.json`:

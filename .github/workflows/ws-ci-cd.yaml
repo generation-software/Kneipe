@@ -44,6 +44,7 @@ name: Java Webservice CI/CD
 env:
   JDK_VERSION: 17
   JDK_DISTRIBUTION: 'adopt'
+  NODE_VERSION: 22
 
 jobs:
   cancel-previous:
@@ -60,70 +61,29 @@ jobs:
     needs: yml-md-style-and-link-checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: ${{ env.JDK_DISTRIBUTION }}
       - name: Run unit & integration tests
         run: mvn -B clean verify
 
-  documentation:
-    if: ${{ !github.event.repository.private }}
-    name: Test & Release Documentation (including Javadoc)
-    needs: tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Setup yarn
-        run: |
-          corepack enable
-          yarn set version latest
-      - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JDK_VERSION }}
-          distribution: ${{ env.JDK_DISTRIBUTION }}
-      - name: Install dependencies
-        working-directory: docs
-        run: yarn
-      - name: Build documentations
-        working-directory: docs
-        run: yarn build
-      - name: Generate Javadoc
-        run: mvn -B clean javadoc:javadoc
-      - name: Move Javadoc into documentation directory
-        run: mv target/site/apidocs/ docs/build/apidocs/
-      - name: Deploy documentation (including Javadoc) to GitHub Pages
-        if: github.ref == 'refs/heads/master'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/build
-          enable_jekyll: false
-          user-name: ${{ inputs.user-name }}
-          user-email: ${{ inputs.user-email }}
-          cname: ${{ inputs.cname }}
-
   docker-image:
-    name: Build Test & Release Development Docker Image
+    name: Test Build & Release Docker Image
     needs: tests
     if: ${{ inputs.dockerhub-username != '' && inputs.docker-image-name != '' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: ${{ env.JDK_DISTRIBUTION }}
-      - name: Build App WAR file so that Docker can pickup during image build
-        run: mvn clean package
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -154,3 +114,45 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: ${{ inputs.dockerhub-username }}/${{ inputs.docker-image-name }}
           readme-filepath: README.md
+
+  documentation:
+    if: ${{ !github.event.repository.private }}
+    name: Test & Release Documentation (including Javadoc)
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Set up JDK ${{ env.JDK_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JDK_VERSION }}
+          distribution: ${{ env.JDK_DISTRIBUTION }}
+      - name: Setup Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Setup yarn
+        run: |
+          corepack enable
+          yarn set version latest
+      - name: Install dependencies
+        working-directory: docs
+        run: yarn
+      - name: Build documentation
+        working-directory: docs
+        run: yarn build
+      - name: Generate Javadoc
+        run: mvn -B clean javadoc:javadoc
+      - name: Move Javadoc into documentation directory
+        run: mv target/reports/apidocs/ docs/build/apidocs/
+      - name: Deploy documentation (including Javadoc) to GitHub Pages
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build
+          enable_jekyll: false
+          user-name: ${{ inputs.user-name }}
+          user-email: ${{ inputs.user-email }}
+          cname: ${{ inputs.cname }}
