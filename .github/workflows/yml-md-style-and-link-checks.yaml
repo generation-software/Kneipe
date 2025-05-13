@@ -47,7 +47,7 @@ jobs:
     name: YAML Style Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Load custom config files if specified
         if: ${{ !inputs.use-custom-yamllint-config-file }}
         run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/.yamllint
@@ -57,7 +57,7 @@ jobs:
     name: Markdown Style Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Load custom config files if specified
         if: ${{ !inputs.use-custom-mdlrc-config-file }}
         run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/.mdlrc
@@ -70,7 +70,7 @@ jobs:
     name: Link Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Load default link check config if not specified
         if: ${{ !inputs.use-custom-lycheeignore-file }}
         run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/.lycheeignore
