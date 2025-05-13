@@ -22,6 +22,7 @@ name: React CI/CD
           Whether or not to use custome .lycheeignore file located at the root of downstream project. Default to "false"
         type: boolean
         required: false
+        default: false
       user-name:
         description: 'git config user.name'
         required: false
