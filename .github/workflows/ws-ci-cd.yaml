@@ -39,6 +39,9 @@ name: Java Webservice CI/CD
         required: false
         type: string
 
+permissions:
+  contents: read
+
 env:
   JDK_VERSION: 17
   JDK_DISTRIBUTION: 'adopt'
@@ -46,11 +49,17 @@ env:
 
 jobs:
   cancel-previous:
-    uses: paion-data/hashistack/.github/workflows/cancel-previous-run.yaml@master
+    uses: paion-data/hashistack/.github/workflows/cancel-previous-run.yaml@bfb9d0121925bfbae425f11b7cb12214926ee080
     secrets: inherit
 
+  pre-commit:
+    uses: paion-data/hashistack/.github/workflows/pre-commit-checks.yaml@master
+    with:
+      use-custom-pre-commit-config-file: false
+
   yml-md-style-and-link-checks:
-    uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yaml@master
+    needs: pre-commit
+    uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yaml@bfb9d0121925bfbae425f11b7cb12214926ee080
     with:
       use-custom-lycheeignore-file: ${{ inputs.use-custom-lycheeignore-file }}
 
@@ -60,9 +69,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: ${{ env.JDK_DISTRIBUTION }}
@@ -76,37 +85,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: ${{ env.JDK_DISTRIBUTION }}
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3.6.0
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2 # v3.10.0
       - name: Test image build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@1dc73863535b631f98b2378be8619f83b136f4a0 # v6.17.0
         with:
           context: .
           push: false
       - name: Login to DockerHub
         if: ${{ github.ref == 'refs/heads/master' && !github.event.repository.private }}
-        uses: docker/login-action@v2
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
         with:
           username: paiondatahub
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Push image to DockerHub
         if: ${{ github.ref == 'refs/heads/master' && !github.event.repository.private }}
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@1dc73863535b631f98b2378be8619f83b136f4a0 # v6.17.0
         with:
           context: .
           push: true
           tags: paiondatahub/${{ inputs.docker-image-name }}:latest
       - name: Push image Description
         if: ${{ github.ref == 'refs/heads/master' && !github.event.repository.private }}
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@432a30c9e07499fd01da9f8a49f0faf9e0ca5b77 # v4.0.2
         with:
           username: paiondatahub
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -120,14 +129,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: ${{ env.JDK_DISTRIBUTION }}
       - name: Setup Node ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Setup yarn
@@ -163,7 +172,7 @@ jobs:
         run: mv target/reports/apidocs/ docs/build/apidocs/
       - name: Deploy documentation (including Javadoc) to GitHub Pages
         if: github.ref == 'refs/heads/master'
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/build

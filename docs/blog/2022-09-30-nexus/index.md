@@ -538,7 +538,7 @@ jobs:
       contents: write # allow for pushing tag
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - uses: actions/setup-java@v3
         with:
           java-version: '11'
@@ -642,7 +642,7 @@ jobs:
       contents: write # allow for pushing tag
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - uses: actions/setup-java@v3
         with:
           java-version: '11'

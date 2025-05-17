@@ -21,9 +21,11 @@ jobs:
   cancel-previous:
     name: Cancel Previous Runs In Order to Allocate Action Resources Immediately for Current Run
     if: github.ref != 'refs/heads/master'
+    permissions:
+      actions: write
     runs-on: ubuntu-latest
     steps:
       - name: Cancel previous
-        uses: styfle/cancel-workflow-action@0.10.1
+        uses: styfle/cancel-workflow-action@85880fa0301c86cca9da44039ee3bb12d3bedbfa #0.12.1
         with:
           access_token: ${{ github.token }}
