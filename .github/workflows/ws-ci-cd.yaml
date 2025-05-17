@@ -53,7 +53,7 @@ jobs:
     secrets: inherit
 
   pre-commit:
-    uses: paion-data/hashistack/.github/workflows/pre-commit-checks.yaml@master
+    uses: paion-data/hashistack/.github/workflows/pre-commit-checks.yaml@6b545df1a42d7f520d1294fb77d00e2e4dd9fb4e
     with:
       use-custom-pre-commit-config-file: false
 
@@ -70,6 +70,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+        with:
+          persist-credentials: false
       - name: Set up JDK ${{ env.JDK_VERSION }}
         uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
@@ -86,6 +88,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+        with:
+          persist-credentials: false
       - name: Set up JDK ${{ env.JDK_VERSION }}
         uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
@@ -130,6 +134,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+        with:
+          persist-credentials: true
       - name: Set up JDK ${{ env.JDK_VERSION }}
         uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
