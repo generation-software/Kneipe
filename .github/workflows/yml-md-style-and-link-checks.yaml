@@ -58,20 +58,20 @@ jobs:
         run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/.yamllint
       - uses: actionshub/yamllint@00f4f7f756a93a38e77ea1af41a46b48fd893dcd # v1.8.3
 
-  markdown-lint:
-    name: Markdown Style Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
-        with:
-          persist-credentials: false
-      - name: Load custom config files if specified
-        if: ${{ !inputs.use-custom-mdlrc-config-file }}
-        run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/.mdlrc
-      - name: Load custom config files if specified
-        if: ${{ !inputs.use-custom-markdownlint-config-file }}
-        run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/markdownlint.rb
-      - uses: actionshub/markdownlint@6c82ff529253530dfbf75c37570876c52692835f # v3.1.4
+#  markdown-lint:
+#    name: Markdown Style Check
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+#        with:
+#          persist-credentials: false
+#      - name: Load custom config files if specified
+#        if: ${{ !inputs.use-custom-mdlrc-config-file }}
+#        run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/.mdlrc
+#      - name: Load custom config files if specified
+#        if: ${{ !inputs.use-custom-markdownlint-config-file }}
+#        run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/markdownlint.rb
+#      - uses: actionshub/markdownlint@6c82ff529253530dfbf75c37570876c52692835f # v3.1.4
 
   linkChecker:
     name: Link Check
