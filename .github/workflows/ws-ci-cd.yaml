@@ -38,6 +38,11 @@ name: Java Webservice CI/CD
       docker-image-name:
         required: false
         type: string
+    secrets:
+      github-token:
+        required: false
+      dockerhub-token:
+        required: false
 
 permissions:
   contents: read
@@ -49,8 +54,11 @@ env:
 
 jobs:
   cancel-previous:
+    permissions:
+      actions: write
     uses: paion-data/hashistack/.github/workflows/cancel-previous-run.yaml@bfb9d0121925bfbae425f11b7cb12214926ee080
-    secrets: inherit
+    secrets:
+      github-token: ${{ secrets.github-token }}
 
   pre-commit:
     uses: paion-data/hashistack/.github/workflows/pre-commit-checks.yaml@6b545df1a42d7f520d1294fb77d00e2e4dd9fb4e
@@ -109,7 +117,7 @@ jobs:
         uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
         with:
           username: paiondatahub
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.dockerhub-token }}
       - name: Push image to DockerHub
         if: ${{ github.ref == 'refs/heads/master' && !github.event.repository.private }}
         uses: docker/build-push-action@1dc73863535b631f98b2378be8619f83b136f4a0 # v6.17.0
@@ -122,7 +130,7 @@ jobs:
         uses: peter-evans/dockerhub-description@432a30c9e07499fd01da9f8a49f0faf9e0ca5b77 # v4.0.2
         with:
           username: paiondatahub
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.dockerhub-token }}
           repository: paiondatahub/${{ inputs.docker-image-name }}
           readme-filepath: README.md
 
@@ -180,7 +188,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.github-token }}
           publish_dir: docs/build
           enable_jekyll: false
           user-name: ${{ inputs.user-name }}
