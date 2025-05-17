@@ -53,7 +53,6 @@ Those workflows are designed for React-based projects only:
 - [npm trends](https://npmtrends.com/)
 - [Defensive CSS](https://defensivecss.dev/)
 - [The Modern JavaScript Tutorial](https://javascript.info/)
-- [local-jwks-server](https://github.com/murar8/local-jwks-server) - [a tool for mocking JWT authentication with JWKS](https://www.reddit.com/r/webdev/comments/15crsg3/i_made_a_tool_for_mocking_jwt_authentication_with/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 
 #### Backend
 

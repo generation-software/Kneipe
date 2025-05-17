@@ -38,7 +38,7 @@ jobs:
     needs: yml-md-style-and-link-checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - run: echo "LAST_TAG=1.2.3" >> $GITHUB_ENV
       - run: |
           NEW_TAG=$(LAST_TAG=${LAST_TAG} python .github/version-bump/upversion.py)
@@ -65,7 +65,7 @@ jobs:
         ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -105,7 +105,7 @@ jobs:
       run:
         working-directory: ./docs/
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
