@@ -20,6 +20,9 @@ name: CI/CD
     branches:
       - master
 
+permissions:
+  contents: read
+
 env:
   USER: QubitPi
   EMAIL: jack20220723@gmail.com
@@ -27,8 +30,11 @@ env:
 
 jobs:
   cancel-previous:
+    permissions:
+      actions: write
     uses: ./.github/workflows/cancel-previous-run.yaml
-    secrets: inherit
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
 
   yml-md-style-and-link-checks:
     uses: ./.github/workflows/yml-md-style-and-link-checks.yaml
