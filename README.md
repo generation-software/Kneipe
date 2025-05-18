@@ -23,5 +23,5 @@ The use and distribution terms for [HashiStack]() are covered by the [Apache Lic
 [Apache License, Version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 [Apache License Badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
 
-[GitHub Workflow Status Badge]: https://img.shields.io/github/actions/workflow/status/paion-data/hashistack/ci-cd.yaml?branch=master&logo=github&style=for-the-badge
-[GitHub Workflow Status URL]: https://github.com/paion-data/hashistack/actions/workflows/ci-cd.yaml
+[GitHub Workflow Status Badge]: https://img.shields.io/github/actions/workflow/status/paion-data/hashistack/hashistack-ci-cd.yaml?branch=master&logo=github&style=for-the-badge
+[GitHub Workflow Status URL]: https://github.com/paion-data/hashistack/actions/workflows/hashistack-ci-cd.yaml
