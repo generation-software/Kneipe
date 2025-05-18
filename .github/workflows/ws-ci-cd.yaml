@@ -34,7 +34,7 @@ name: Java Webservice CI/CD
       github-token:
         required: false
       dockerhub-token:
-        required: false
+        required: true
 
 permissions:
   contents: read
@@ -48,18 +48,18 @@ jobs:
   cancel-previous:
     permissions:
       actions: write
-    uses: paion-data/hashistack/.github/workflows/cancel-previous-run.yaml@bfb9d0121925bfbae425f11b7cb12214926ee080
+    uses: paion-data/hashistack/.github/workflows/cancel-previous-run.yaml@master
     secrets:
       github-token: ${{ secrets.github-token }}
 
   pre-commit:
-    uses: paion-data/hashistack/.github/workflows/pre-commit-checks.yaml@6b545df1a42d7f520d1294fb77d00e2e4dd9fb4e
+    uses: paion-data/hashistack/.github/workflows/pre-commit-checks.yaml@master
     with:
       use-custom-pre-commit-config-file: false
 
   yml-md-style-and-link-checks:
     needs: pre-commit
-    uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yaml@bfb9d0121925bfbae425f11b7cb12214926ee080
+    uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yaml@master
     with:
       use-custom-lycheeignore-file: ${{ inputs.use-custom-lycheeignore-file }}
 
@@ -130,6 +130,8 @@ jobs:
     if: ${{ !github.event.repository.private }}
     name: Test & Release Documentation (including Javadoc)
     needs: tests
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository

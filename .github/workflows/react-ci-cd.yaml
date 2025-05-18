@@ -29,7 +29,7 @@ name: React CI/CD
         type: string
     secrets:
       github-token:
-        required: false
+        required: true
 
 permissions:
   contents: read
@@ -58,6 +58,7 @@ jobs:
 
   code-style:
     name: Code Style Check
+    needs: pre-commit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
@@ -81,56 +82,7 @@ jobs:
         run: yarn eslint .
         shell: bash
 
-  lighthouse:
-    if: github.ref != 'refs/heads/master'
-    needs: [yml-md-style-and-link-checks, code-style]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Set up yarn
-        run: |
-          corepack enable
-          yarn set version latest
-      - name: Install dependencies
-        run: yarn
-      - name: Audit URLs using Lighthouse
-        id: lighthouse_audit
-        uses: treosh/lighthouse-ci-action@2f8dda6cf4de7d73b29853c3f29e73a01e297bd8  # 12.1.0
-        with:
-          urls: |
-            http://localhost:3000
-          uploadArtifacts: true
-          temporaryPublicStorage: true
-          budgetPath: ./.github/lighthouse/lighthouse-budget.json
-          configPath: ./.github/lighthouse/lighthouserc.json
-
-      - name: Format lighthouse score
-        id: format_lighthouse_score
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # 7.0.1
-        with:
-          github-token: ${{ env.github-token }}
-          script: |
-            const results = ${{ steps.lighthouse_audit.outputs.manifest }}
-            const links = ${{ steps.lighthouse_audit.outputs.links }}
-            const createLighthouseReport = (await import(`${process.env.GITHUB_WORKSPACE}/.github/lighthouse/formatLighthouseReport.js`)).default;
-            const comment = createLighthouseReport({ results, links });
-            core.setOutput("comment", comment);
-
-      - name: Add Lighthouse stats as comment
-        id: comment_to_pr
-        uses: marocchino/sticky-pull-request-comment@efaaab3fd41a9c3de579aba759d2552635e590fd  # 2.8.0
-        with:
-          GITHUB_TOKEN: ${{ env.github-token }}
-          number: ${{ github.event.pull_request.number }}
-          header: lighthouse
-          message: ${{ steps.format_lighthouse_score.outputs.comment }}
-
-  unit-test:
+  unit-tests:
     name: Unit Tests
     needs: [yml-md-style-and-link-checks, code-style]
     runs-on: ubuntu-latest
@@ -224,10 +176,63 @@ jobs:
             ./cypress/videos
             ./cypress/screenshots
 
+  lighthouse:
+    if: github.ref != 'refs/heads/master'
+    needs: e2e-tests
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Set up yarn
+        run: |
+          corepack enable
+          yarn set version latest
+      - name: Install dependencies
+        run: yarn
+      - name: Audit URLs using Lighthouse
+        id: lighthouse_audit
+        uses: treosh/lighthouse-ci-action@2f8dda6cf4de7d73b29853c3f29e73a01e297bd8  # 12.1.0
+        with:
+          urls: |
+            http://localhost:3000
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          budgetPath: ./.github/lighthouse/lighthouse-budget.json
+          configPath: ./.github/lighthouse/lighthouserc.json
+      - name: Format lighthouse score
+        id: format_lighthouse_score
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # 7.0.1
+        with:
+          github-token: ${{ secrets.github-token }}
+          script: |
+            const results = ${{ steps.lighthouse_audit.outputs.manifest }}
+            const links = ${{ steps.lighthouse_audit.outputs.links }}
+            const createLighthouseReport = (await import(`${process.env.GITHUB_WORKSPACE}/.github/lighthouse/formatLighthouseReport.js`)).default;
+            const comment = createLighthouseReport({ results, links });
+            core.setOutput("comment", comment);
+      - name: Add Lighthouse stats as comment
+        id: comment_to_pr
+        uses: marocchino/sticky-pull-request-comment@efaaab3fd41a9c3de579aba759d2552635e590fd  # 2.8.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.github-token }}
+          number: ${{ github.event.pull_request.number }}
+          header: lighthouse
+          message: ${{ steps.format_lighthouse_score.outputs.comment }}
+
   deploy:
     name: Deploy to GitHub Pages
+    needs: [unit-tests, e2e-tests, lighthouse]
     if: ${{ !github.event.repository.private }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
         with:
@@ -249,7 +254,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e  # v4.0.0
         with:
-          github_token: ${{ env.github-token }}
+          github_token: ${{ secrets.github-token }}
           publish_dir: dist
           enable_jekyll: false
           user_name: paion-data-bot
