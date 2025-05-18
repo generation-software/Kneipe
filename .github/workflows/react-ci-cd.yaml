@@ -35,13 +35,27 @@ name: React CI/CD
         description: 'The CNAME of the React app deployed to GitHub Pages'
         required: false
         type: string
+    secrets:
+      github-token:
+        required: false
+      dockerhub-token:
+        required: false
 
 jobs:
   cancel-previous:
+    permissions:
+      actions: write
     uses: paion-data/hashistack/.github/workflows/cancel-previous-run.yaml@master
-    secrets: inherit
+    secrets:
+      github-token: ${{ secrets.github-token }}
+
+  pre-commit:
+    uses: paion-data/hashistack/.github/workflows/pre-commit-checks.yaml@master
+    with:
+      use-custom-pre-commit-config-file: false
 
   yml-md-style-and-link-checks:
+    needs: pre-commit
     uses: paion-data/hashistack/.github/workflows/yml-md-style-and-link-checks.yaml@master
     with:
       use-custom-lycheeignore-file: ${{ inputs.use-custom-lycheeignore-file }}
