@@ -50,19 +50,19 @@ jobs:
     name: YAML Style Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
         with:
           persist-credentials: false
       - name: Load custom config files if specified
         if: ${{ !inputs.use-custom-yamllint-config-file }}
         run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/.yamllint
-      - uses: actionshub/yamllint@00f4f7f756a93a38e77ea1af41a46b48fd893dcd # v1.8.3
+      - uses: actionshub/yamllint@00f4f7f756a93a38e77ea1af41a46b48fd893dcd  # v1.8.3
 
   markdown-lint:
     name: Markdown Style Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
         with:
           persist-credentials: false
       - name: Load custom config files if specified
@@ -71,19 +71,19 @@ jobs:
       - name: Load custom config files if specified
         if: ${{ !inputs.use-custom-markdownlint-config-file }}
         run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/markdownlint.rb
-      - uses: actionshub/markdownlint@6c82ff529253530dfbf75c37570876c52692835f # v3.1.4
+      - uses: actionshub/markdownlint@6c82ff529253530dfbf75c37570876c52692835f  # v3.1.4
 
   linkChecker:
     name: Link Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
         with:
           persist-credentials: false
       - name: Load default link check config if not specified
         if: ${{ !inputs.use-custom-lycheeignore-file }}
         run: wget https://raw.githubusercontent.com/paion-data/hashistack/master/.github/yml-md-style-and-link-checks/.lycheeignore
       - name: Link Checker
-        uses: lycheeverse/lychee-action@82202e5e9c2f4ef1a55a3d02563e1cb6041e5332 # v2.4.1
+        uses: lycheeverse/lychee-action@82202e5e9c2f4ef1a55a3d02563e1cb6041e5332  # v2.4.1
         with:
           fail: true
