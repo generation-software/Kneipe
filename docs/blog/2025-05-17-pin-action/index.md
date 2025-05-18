@@ -122,7 +122,7 @@ jobs:
   example_job:
     runs-on: ubuntu-latest
     steps:
-      - uses: RafaelGSS/bad-action@e20fd1d81b3f403df56f5f06e2aa9653a6a60763 # v1.0.1
+      - uses: RafaelGSS/bad-action@e20fd1d81b3f403df56f5f06e2aa9653a6a60763  # v1.0.1
 ```
 
 Adding a comment referring to the tag enables automated dependency updates, such as Dependabot or Renovatebot, to update it whenever a new release is detected. [We can see an example of this in action in the Node.js Security WG repository](https://github.com/nodejs/security-wg/pull/1009).
