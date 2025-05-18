@@ -81,7 +81,7 @@ jobs:
         version: [10, 12, 14]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.version }}
 ```
@@ -118,7 +118,7 @@ jobs:
       matrix:
         version: ${{ github.event.client_payload.versions }}
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.version }}
 ```
@@ -195,7 +195,7 @@ jobs:
             npm: 6
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.node }}
       - if: ${{ matrix.npm }}
