@@ -1,46 +1,17 @@
-XXX
-===
+Kneipe
+======
 
 [![Apache License][Apache License Badge]][Apache License, Version 2.0]
 
-The History of XXX
+Phases
+------
 
 1. [A Collection of Bash Shell Script](https://github.com/paion-data/hashistack/tree/4f08be0926ca8bda6da3078c37b832915b966988)
-
-Phase 2 - CHEF
---------------
-
-When I was working at Yahoo! from Feb 22nd, 2016 to the end Oct 22nd, 2019, I saw the extensive usage of 
-
-XXX as of Now
--------------
-
-Where 
-
-- CHEF is used as my personal SaaS projects
-
-
-__HashiStack__ is an opinionated GitHub CI/CD library of
-[GitHub Actions Reusable Workflows](https://docs.github.com/en/actions/sharing-automations/reusing-workflows) that are
-shared among Paion Data projects. It is an effort that __unifies and standardize the CI/CD of software developed within
-Paion Data__.
-
-![HashiCorp deoloyment "Error loading ci-cd.png"](../github/QubitPi/img/ci-cd.png)
-
-
-
-HashiCorp
----------
-
-Screwdriver
------------
-
-
-Final - Today
--------------
-
-As of
-
+2. [CHEF](https://github.com/generation-software/Kneipe/tree/bf2fe169ccef087e56e58ba27ac308ca88d5317a): When I was
+   working at Yahoo! from Feb 22nd, 2016 to the end Oct 22nd, 2019, I saw the extensive usage of CHEF used in the
+   internal CI/CD's of Yahoo's software developments. This notion of Infrastructure as Code sparked my interests on
+   DevOps
+3. HashiCorp
 
 License
 -------
