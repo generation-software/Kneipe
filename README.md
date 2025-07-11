@@ -6,12 +6,20 @@ Kneipe
 Phases
 ------
 
-1. [A Collection of Bash Shell Script](https://github.com/paion-data/hashistack/tree/4f08be0926ca8bda6da3078c37b832915b966988)
-2. [CHEF](https://github.com/generation-software/Kneipe/tree/bf2fe169ccef087e56e58ba27ac308ca88d5317a): When I was
+1. Phase 1 - [A Collection of Bash Shell Script](https://github.com/paion-data/hashistack/tree/4f08be0926ca8bda6da3078c37b832915b966988)
+2. Phase 2 - [CHEF](https://github.com/generation-software/Kneipe/tree/bf2fe169ccef087e56e58ba27ac308ca88d5317a): When I was
    working at Yahoo! from Feb 22nd, 2016 to the end Oct 22nd, 2019, I saw the extensive usage of CHEF used in the
    internal CI/CD's of Yahoo's software developments. This notion of Infrastructure as Code sparked my interests on
    DevOps
-3. HashiCorp
+3. [HashiCorp](): I was researching deploying k8s and Google came up a concept I was never heard of:
+   [k8s through AMI](https://github.com/awslabs/amazon-eks-ami). It was this GitHub repo that open up a whole new world
+   to my career: HashiCorp, AWS AMI, and
+   [Immutable Infrastructure](https://www.hashicorp.com/resources/what-is-mutable-vs-immutable-infrastructure). The
+   notion of immutable infrastructure as advanced by HashiCorp grabbed my deep interests so intensively that kept
+   myself learning and that incubated this phase. It condensed my passion for the best practice of software
+   infrastructure.
+4. HashiCorp + Screwdriver
+5. back to phase 1
 
    !["Error loading hashicorp.png"](./docs/hashicorp.png)
 
