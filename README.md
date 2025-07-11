@@ -13,6 +13,10 @@ Phases
    DevOps
 3. HashiCorp
 
+   !["Error loading hashicorp.png"](./docs/ci-cd.png)
+
+
+
 License
 -------
 
