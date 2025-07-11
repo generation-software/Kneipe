@@ -1,4 +1,4 @@
-# Copyright 2025 Paion Data. All rights reserved.
+# Copyright 2025 Jiaqi Liu. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,13 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM ubuntu:22.04
 
-LABEL maintainer="Jiaqi (Jack) Liu"
-LABEL maintainer-email="jack20220723@gmail.com"
+#!/bin/bash
 
-RUN apt update
-RUN apt upgrade -y
-RUN apt install software-properties-common -y
-RUN apt install wget -y
-RUN apt install curl -y
+set -x
+set -e
+
+# $1 = input mp4 path
+# $2 = .srt path
+# $3 = output mp4 path
+# $4 = font, default to Poppins
+# $5 = font size, default to 24
+
+ffmpeg -i $1 -vf "subtitles=${2}:force_style='FontName=${4:-Poppins},Fontsize=${5:-24}'" $3

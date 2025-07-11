@@ -1,4 +1,4 @@
-# Copyright 2025 Paion Data. All rights reserved.
+# Copyright 2025 Jiaqi Liu. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,32 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Dependencies
-/node_modules
+#!/bin/bash
 
-# Production
-/build
+until $1; do
+    echo "Failed executing - $1. Retrying in 5 seconds..."
+    sleep 5
+done
 
-# Generated files
-.docusaurus
-.cache-loader
-
-# Misc
-.idea/
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+echo "Script succeeded!"
