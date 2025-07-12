@@ -49,7 +49,7 @@ Those workflows are designed for React-based projects only:
 - [Jest](https://jest.paion-data.dev/)
 - [json-server](https://github.com/typicode/json-server) - Quick back-end for prototyping and mocking
 - [lowdb](https://github.com/typicode/lowdb) - Simple to use type-safe local __JSON database__
-- [Nodesource](https://deb.nodesource.com/) - Universal node & npm installer
+
 - [npm trends](https://npmtrends.com/)
 - [Defensive CSS](https://defensivecss.dev/)
 - [The Modern JavaScript Tutorial](https://javascript.info/)
