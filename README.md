@@ -107,6 +107,12 @@ The following examples assumes the input image is "input.png" and output image w
 curl -sL https://raw.githubusercontent.com/generation-software/Kneipe/refs/heads/master/loop.sh | bash -s -- <command>
 ```
 
+### Merge Audio in Loop into Video
+
+```console
+curl -sL https://raw.githubusercontent.com/generation-software/Kneipe/refs/heads/master/audio-into-video.sh | bash -s -- input.mp4 input.mp3 output.mp4
+```
+
 License
 -------
 
